@@ -31,21 +31,35 @@ const EmployeeTable = ({ employees }) => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell sx={{ textAlign: "center" }}>
+                            <TableCell
+                                sx={{ textAlign: "center", fontWeight: 600 }}
+                            >
+                                S. No.
+                            </TableCell>
+                            <TableCell
+                                sx={{ textAlign: "center", fontWeight: 600 }}
+                            >
                                 Employee Id
                             </TableCell>
-                            <TableCell sx={{ textAlign: "center" }}>
+                            <TableCell
+                                sx={{ textAlign: "center", fontWeight: 600 }}
+                            >
                                 Employee Name
                             </TableCell>
 
-                            <TableCell sx={{ textAlign: "center" }}>
+                            <TableCell
+                                sx={{ textAlign: "center", fontWeight: 600 }}
+                            >
                                 Action
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {employees.map((employee) => (
+                        {employees.map((employee, idx) => (
                             <TableRow key={employee._id}>
+                                <TableCell sx={{ textAlign: "center" }}>
+                                    {idx + 1}
+                                </TableCell>
                                 <TableCell sx={{ textAlign: "center" }}>
                                     {employee._id}
                                 </TableCell>
