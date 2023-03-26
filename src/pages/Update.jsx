@@ -73,13 +73,20 @@ function Update() {
     async function onSubmitHandler(event) {
         event.preventDefault();
         setSubmitSuccess(false);
+        let numericalAge;
+        console.log(typeof age);
         if (name.trim().length === 0) {
             setUpdateError("Enter Name!!!");
             return;
         }
-        if (age.trim().length === 0) {
-            setUpdateError("Enter Age!!!");
-            return;
+        if (typeof age === "string") {
+            if (age.trim().length === 0) {
+                setUpdateError("Enter Age!!!");
+                return;
+            }
+            numericalAge = parseInt(age);
+        } else {
+            numericalAge = age;
         }
         if (!address) {
             setUpdateError("Enter Address!!!");
@@ -93,7 +100,7 @@ function Update() {
             setUpdateError("Select status!!!");
             return;
         }
-        const numericalAge = parseInt(age);
+
         if (isNaN(numericalAge)) {
             setUpdateError("Age should be a nummber!");
             return;
