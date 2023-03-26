@@ -13,6 +13,7 @@ import { green, red } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
+import SearchAutocomplete from "../components/SearchAutoComplete";
 
 function Create() {
     const [name, setName] = useState("");
@@ -28,9 +29,9 @@ function Create() {
     function handleAgeChange(event) {
         setAge(event.target.value);
     }
-    function handleAddressChange(event) {
-        setAddress(event.target.value);
-    }
+    // function handleAddressChange(event) {
+    //     setAddress(event.target.value);
+    // }
     function handleDepartmentChange(event) {
         setDepartment(event.target.value);
     }
@@ -49,8 +50,8 @@ function Create() {
             setError("Enter Age!!!");
             return;
         }
-        if (address.trim().length === 0) {
-            setError("Enter Address!!!");
+        if (!address) {
+            setError("Enter Address!");
             return;
         }
         if (department.trim().length === 0) {
@@ -73,8 +74,10 @@ function Create() {
                     e_name: name,
                     e_age: numericalAge,
                     e_department: department,
-                    e_address: address,
+                    e_address: address.label,
                     e_status: status,
+                    lat: address.lat,
+                    long: address.long,
                 }
             );
             setSubmitSuccess(response.data.message);
@@ -114,14 +117,17 @@ function Create() {
                         type="number"
                         onChange={handleAgeChange}
                     />
-                    <TextField
-                        margin="normal"
-                        label="Employee Address"
-                        variant="outlined"
-                        required
-                        value={address}
-                        onChange={handleAddressChange}
-                    />
+                    {
+                        // <TextField
+                        //     margin="normal"
+                        //     label="Employee Address"
+                        //     variant="outlined"
+                        //     required
+                        //     value={address}
+                        //     onChange={handleAddressChange}
+                        // />
+                    }
+                    <SearchAutocomplete value={address} setValue={setAddress} />
                     <TextField
                         margin="normal"
                         label="Employee Department"

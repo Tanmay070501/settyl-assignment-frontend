@@ -14,6 +14,7 @@ import { green, red } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
+import SearchAutocomplete from "../components/SearchAutoComplete";
 
 function Update() {
     const [name, setName] = useState("");
@@ -35,9 +36,9 @@ function Update() {
     function handleAgeChange(event) {
         setAge(event.target.value);
     }
-    function handleAddressChange(event) {
-        setAddress(event.target.value);
-    }
+    // function handleAddressChange(event) {
+    //     setAddress(event.target.value);
+    // }
     function handleDepartmentChange(event) {
         setDepartment(event.target.value);
     }
@@ -80,7 +81,7 @@ function Update() {
             setUpdateError("Enter Age!!!");
             return;
         }
-        if (address.trim().length === 0) {
+        if (!address) {
             setUpdateError("Enter Address!!!");
             return;
         }
@@ -105,8 +106,10 @@ function Update() {
                     e_name: name,
                     e_age: numericalAge,
                     e_department: department,
-                    e_address: address,
+                    e_address: address.label,
                     e_status: status,
+                    lat: address.lat,
+                    long: address.long,
                 }
             );
             setSubmitSuccess(response.data.message);
@@ -182,13 +185,19 @@ function Update() {
                                 type="number"
                                 onChange={handleAgeChange}
                             />
-                            <TextField
-                                margin="normal"
-                                label="Employee Address"
-                                variant="outlined"
-                                required
+                            {
+                                //<TextField
+                                //     margin="normal"
+                                //     label="Employee Address"
+                                //     variant="outlined"
+                                //     required
+                                //     value={address}
+                                //     onChange={handleAddressChange}
+                                // />
+                            }
+                            <SearchAutocomplete
                                 value={address}
-                                onChange={handleAddressChange}
+                                setValue={setAddress}
                             />
                             <TextField
                                 margin="normal"

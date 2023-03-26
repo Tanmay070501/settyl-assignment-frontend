@@ -1,5 +1,6 @@
 import { Box, Fade, Modal, Typography } from "@mui/material";
 import React from "react";
+import Map from "./Map";
 
 const style = {
     position: "absolute",
@@ -13,7 +14,7 @@ const style = {
 };
 
 function EmployeeModal({ employee, isOpen, onClose }) {
-    const { name, address, age, department, status } = employee;
+    const { name, address, age, department, status, lat, long } = employee;
     return (
         <Modal
             open={isOpen}
@@ -43,6 +44,13 @@ function EmployeeModal({ employee, isOpen, onClose }) {
                         <Typography variant="subtitle1" gutterBottom>
                             Status: {status}
                         </Typography>
+                        {isOpen && (
+                            <Map
+                                lat={parseFloat(lat)}
+                                long={parseFloat(long)}
+                                address={address}
+                            />
+                        )}
                     </Box>
                 </Box>
             </Fade>
